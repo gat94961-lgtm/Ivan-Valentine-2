@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ivan, Be My Valentine 💘</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 25px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      max-width: 90%;
+      width: 360px;
+      animation: pop 0.8s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.6); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      color: #ff3b6f;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.15em;
+      margin: 15px 0;
+      color: #444;
+    }
+
+    button {
+      padding: 12px 22px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .yes {
+      background: #ff3b6f;
+      color: white;
+    }
+
+    .yes:hover {
+      transform: scale(1.1);
+    }
+
+    .no {
+      background: #eee;
+      color: #333;
+      position: fixed;
+      left: 50%;
+      top: 65%;
+      transform: translate(-50%, -50%);
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff3b6f;
+      animation: float 5s linear infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
+    }
+
+    iframe {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background music -->
+  <iframe 
+    src="https://www.youtube.com/embed/GCdwKhTtNNw?autoplay=1&loop=1&playlist=GCdwKhTtNNw"
+    allow="autoplay">
+  </iframe>
+
+  <div class="card" id="card">
+    <h1>💘 Ivan 💘</h1>
+    <p>
+      I tried to think of a normal way to ask…<br>
+      but I like you too much for normal 😌
+    </p>
+    <p>
+      So here it is:<br>
+      <strong>Will you be my Valentine?</strong>
+    </p>
+
+    <button class="yes" onclick="firstYes()">YES 😍</button>
+  </div>
+
+  <button class="no" id="noBtn">No 😐</button>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+
+    function escapeNo() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    // Make NO impossible on ALL interactions
+    noBtn.addEventListener("mouseover", escapeNo);
+    noBtn.addEventListener("click", escapeNo);
+    noBtn.addEventListener("touchstart", escapeNo);
+    document.addEventListener("scroll", escapeNo);
+
+    function firstYes() {
+      document.getElementById("card").innerHTML = `
+        <h1>🥰 WAIT 🥰</h1>
+        <p>
+          Before you celebrate…<br>
+          I need to ask one more thing 😏
+        </p>
+        <button class="yes" onclick="secondYes()">Continue 💖</button>
+      `;
+    }
+
+    function secondYes() {
+      document.getElementById("card").innerHTML = `
+        <h1>💖 IT’S OFFICIAL 💖</h1>
+        <p>
+          Ivan,<br>
+          you’re my Valentine 💘
+        </p>
+        <p>
+          Thank you for choosing me.<br>
+          I promise laughs, warmth,<br>
+          and way too much affection 😘
+        </p>
+      `;
+      startHearts();
+      noBtn.remove();
+    }
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 25 + 15 + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }, 250);
+    }
+  </script>
+
+</body>
+</html>
